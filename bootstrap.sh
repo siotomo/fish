@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fish shell dotfiles bootstrap script
-# fish_pluginsのシンボリックリンクを作成
+# fish_pluginsのシンボリックリンクを作成し、fisherをインストール
 
 set -e
 
@@ -16,7 +16,7 @@ if [ ! -d "$CONFIG_DIR/fish" ]; then
     mkdir -p "$CONFIG_DIR/fish"
 fi
 
-# fish_pluginsのリンクを作成
+# fish_pluginsのリンクを作成（fisherインストール前に作成することで内容を保護）
 if [ -L "$CONFIG_DIR/fish/fish_plugins" ]; then
     echo "✓ fish_plugins symlink already exists"
 elif [ -f "$CONFIG_DIR/fish/fish_plugins" ]; then
@@ -28,6 +28,23 @@ else
     ln -s "$SCRIPT_DIR/fish_plugins" "$CONFIG_DIR/fish/fish_plugins"
     echo "✓ fish_plugins symlink created"
 fi
+
+# fisherがインストールされているかチェック
+echo ""
+echo "Checking fisher installation..."
+if fish -c "type -q fisher" 2>/dev/null; then
+    echo "✓ fisher is already installed"
+else
+    echo "Installing fisher..."
+    fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+    echo "✓ fisher installed"
+fi
+
+# プラグインをインストール
+echo ""
+echo "Installing plugins..."
+fish -c "fisher update"
+echo "✓ Plugins installed"
 
 echo ""
 echo "✨ Setup complete!"
