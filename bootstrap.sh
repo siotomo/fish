@@ -40,6 +40,23 @@ else
     echo "✓ fisher installed"
 fi
 
+# fish_pluginsファイルに下記5つの内容がなければ追記
+FISH_PLUGINS_LIST=(
+    "jorgebucaran/fisher"
+    "oh-my-fish/theme-bobthefish"
+    "jethrokuan/z"
+    "oh-my-fish/plugin-peco"
+    "ilancosman/tide@v6"
+)
+FISH_PLUGINS_PATH="$SCRIPT_DIR/fish_plugins"
+
+for plugin in "${FISH_PLUGINS_LIST[@]}"; do
+    if ! grep -Fxq "$plugin" "$FISH_PLUGINS_PATH"; then
+        echo "$plugin" >> "$FISH_PLUGINS_PATH"
+        echo "Added $plugin to fish_plugins"
+    fi
+done
+
 # プラグインをインストール
 echo ""
 echo "Installing plugins..."
