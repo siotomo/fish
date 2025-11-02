@@ -6,7 +6,9 @@ Fish shell のプラグイン設定。
 
 ```bash
 ./bootstrap.sh
+fisher update
 ```
 
-`fish_plugins` を `~/.config/fish/` にシンボリックリンクします。
+1. `fish_plugins` を `~/.config/fish/` にシンボリックリンクします
+2. プラグインをインストールします
 
