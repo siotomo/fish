@@ -40,10 +40,9 @@ else
     echo "✓ fisher installed"
 fi
 
-# fish_pluginsファイルに下記5つの内容がなければ追記
+# fish_pluginsファイルに下記4つの内容がなければ追記
 FISH_PLUGINS_LIST=(
     "jorgebucaran/fisher"
-    "oh-my-fish/theme-bobthefish"
     "jethrokuan/z"
     "oh-my-fish/plugin-peco"
     "ilancosman/tide@v6"
