@@ -80,7 +80,7 @@ echo "✓ Plugins installed"
 # Tide プロンプトの初期設定
 echo ""
 echo "Configuring Tide prompt..."
-fish -c "./tide_configure.sh"
+fish -c "$SCRIPT_DIR/tide_configure.sh"
 echo "✓ Tide prompt configured"
 echo ""
 echo "✨ Setup complete!"
