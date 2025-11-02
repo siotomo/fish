@@ -16,18 +16,33 @@ if [ ! -d "$CONFIG_DIR/fish" ]; then
     mkdir -p "$CONFIG_DIR/fish"
 fi
 
+# シンボリックリンクを作成する関数
+create_symlink() {
+    local src="$1"
+    local dest="$2"
+    local name="$3"
+    
+    if [ -L "$dest" ]; then
+        echo "✓ $name symlink already exists"
+    elif [ -e "$dest" ]; then
+        echo "⚠️  $name exists. Backing up..."
+        mv "$dest" "$dest.backup"
+        ln -s "$src" "$dest"
+        echo "✓ $name symlink created (backup saved)"
+    else
+        ln -s "$src" "$dest"
+        echo "✓ $name symlink created"
+    fi
+}
+
 # fish_pluginsのリンクを作成（fisherインストール前に作成することで内容を保護）
-if [ -L "$CONFIG_DIR/fish/fish_plugins" ]; then
-    echo "✓ fish_plugins symlink already exists"
-elif [ -f "$CONFIG_DIR/fish/fish_plugins" ]; then
-    echo "⚠️  fish_plugins exists as a regular file. Backing up..."
-    mv "$CONFIG_DIR/fish/fish_plugins" "$CONFIG_DIR/fish/fish_plugins.backup"
-    ln -s "$SCRIPT_DIR/fish_plugins" "$CONFIG_DIR/fish/fish_plugins"
-    echo "✓ fish_plugins symlink created (backup saved)"
-else
-    ln -s "$SCRIPT_DIR/fish_plugins" "$CONFIG_DIR/fish/fish_plugins"
-    echo "✓ fish_plugins symlink created"
-fi
+create_symlink "$SCRIPT_DIR/fish_plugins" "$CONFIG_DIR/fish/fish_plugins" "fish_plugins"
+
+# conf.d/のリンクを作成
+create_symlink "$SCRIPT_DIR/conf.d" "$CONFIG_DIR/fish/conf.d" "conf.d"
+
+# functions/のリンクを作成
+create_symlink "$SCRIPT_DIR/functions" "$CONFIG_DIR/fish/functions" "functions"
 
 # fisherがインストールされているかチェック
 echo ""
