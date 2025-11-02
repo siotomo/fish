@@ -62,5 +62,10 @@ echo "Installing plugins..."
 fish -c "fisher update"
 echo "✓ Plugins installed"
 
+# Tide プロンプトの初期設定
+echo ""
+echo "Configuring Tide prompt..."
+fish -c "./tide_configure.sh"
+echo "✓ Tide prompt configured"
 echo ""
 echo "✨ Setup complete!"
