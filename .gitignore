@@ -1,0 +1,23 @@
+# プラグインで自動生成されるファイルを除外
+
+# Tide プラグイン
+functions/_tide_*.fish
+functions/tide.fish
+functions/tide/
+functions/fish_prompt.fish
+functions/fish_mode_prompt.fish
+conf.d/_tide_init.fish
+
+# Z プラグイン
+functions/__z*.fish
+conf.d/z.fish
+
+# Fisher プラグイン
+functions/fisher.fish
+
+# Peco プラグイン（pecoがインストールした関数、カスタムは除く）
+functions/peco_*.fish
+
+# カスタム関数は除外しない
+!functions/custom/
+
