@@ -15,9 +15,8 @@ conf.d/z.fish
 # Fisher プラグイン
 functions/fisher.fish
 
-# Peco プラグイン（pecoがインストールした関数、カスタムは除く）
-functions/peco_*.fish
+# Peco プラグイン
+# カスタムのpeco_select_historyとpeco_killは管理する
 
 # カスタム関数は除外しない
 !functions/custom/
-
